@@ -1,6 +1,6 @@
 import { Accounts, AccountsTypes } from '../types';
 
-type DataProps = {
+export type DataProps = {
   data: Accounts[];
   dataTypes: AccountsTypes[];
 };
@@ -10,9 +10,15 @@ const Table = ({ data, dataTypes }: DataProps) => {
     <table>
       <thead>
         <tr>
-          <th colSpan={1}>Name</th>
-          <th colSpan={1}>Profit & Loss</th>
-          <th colSpan={1}>Account Type</th>
+          <th role="columnheader" colSpan={1}>
+            Name
+          </th>
+          <th role="columnheader" colSpan={1}>
+            Profit & Loss
+          </th>
+          <th role="columnheader" colSpan={1}>
+            Account Type
+          </th>
         </tr>
       </thead>
 
@@ -20,14 +26,16 @@ const Table = ({ data, dataTypes }: DataProps) => {
         {data.map((account) => {
           return (
             <tr key={account.id}>
-              <td>{account.name}</td>
-              <td>
+              <td role={'cell'}>{account.name}</td>
+              <td role={'cell'}>
                 {account.currency} {account.profitLoss}
               </td>
               {dataTypes.map((item) => {
                 return (
                   account.accountType === item.id && (
-                    <td key={item.id}>{item.title}</td>
+                    <td role={'cell'} key={item.id}>
+                      {item.title}
+                    </td>
                   )
                 );
               })}
